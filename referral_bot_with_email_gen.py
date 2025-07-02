@@ -23,16 +23,16 @@ email_lock = threading.Lock()
 def random_string(length=8):
     return ''.join(random.choices(string.ascii_lowercase, k=length))
 
-def generate_emails():
-    print(f"📤 Generating {EMAIL_COUNT} emails...")
-    with open(EMAIL_FILE, "w") as f:
-        for _ in range(EMAIL_COUNT):
+def generate_emails(filename=EMAIL_FILE, count=EMAIL_COUNT):
+    print(f"📤 Generating {count} fake Gmail emails...")
+    with open(filename, "w") as f:
+        for _ in range(count):
             first = random_string()
             last = random_string()
             number = random.randint(100, 999)
             email = f"{first}.{last}{number}@gmail.com"
             f.write(email + "\n")
-    print(f"✅ Saved to {EMAIL_FILE}")
+    print(f"✅ {count} fake emails saved to {filename}")
 
 def load_emails():
     global email_list
